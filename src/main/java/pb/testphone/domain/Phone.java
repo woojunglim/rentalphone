@@ -2,6 +2,7 @@ package pb.testphone.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import pb.testphone.exception.NotEnoughStockException;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -23,4 +24,15 @@ public abstract class Phone {
     @ManyToMany(mappedBy = "phones")
     private List<Category> cateories = new ArrayList<Category>();
 
+    public void addStock(int quantity) {
+        this.stockQuantity += quantity;
+    }
+
+    public void removeStock(int quantity) {
+        int restStock = stockQuantity - quantity;
+        if(restStock < 0 ){
+            throw new NotEnoughStockException("need more stock");
+        }
+        this.stockQuantity -= quantity;
+    }
 }

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.util.ObjectUtils;
 import pb.testphone.domain.Member;
 import pb.testphone.repository.MemberRepository;
 
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
-@RequiredArgsConstructor d
+@RequiredArgsConstructor
 public class MemberService {
 
     private final MemberRepository memberRepository;
@@ -22,7 +23,7 @@ public class MemberService {
      * @return Member.id
      */
     @Transactional
-    private Long join(Member member) {
+    public Long join(Member member) {
         validateDuplicateMember(member);
         memberRepository.save(member);
         return member.getId();
@@ -33,8 +34,8 @@ public class MemberService {
      * @param member
      */
     private void validateDuplicateMember(Member member) {
-        List<Member> findMemebers = memberRepository.findByName(member.getName());
-        if (!findMemebers.isEmpty()) {
+        Member findMembers = memberRepository.findOne(member.getId());
+        if (findMembers != null) {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
     }

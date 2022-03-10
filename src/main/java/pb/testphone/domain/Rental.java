@@ -24,7 +24,7 @@ public class Rental {
     @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL)
     private List<RentalPhone> rentalPhones = new ArrayList<>();
 
-    private LocalDateTime rentTime; // 대여시간
+    private LocalDateTime rentalTime; // 대여시간
 
     @Enumerated(EnumType.STRING)
     private RentalState status; // 대여상태 [REMTAL, RETURN]
