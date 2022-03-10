@@ -19,7 +19,6 @@ import static org.junit.Assert.*;
 public class MemberServiceTest {
 
     @Autowired MemberService memberService;
-    @Autowired MemberRepository memberRepository;
 
     @Test
     public void 회원가입() throws Exception {
@@ -55,7 +54,7 @@ public class MemberServiceTest {
     }
 
     @Test
-    public void 회원_다건_조회() throws Exception {
+    public void 회원_전체_조회() throws Exception {
         //given
         Member member1 = new Member();
         member1.setId(20214100L);

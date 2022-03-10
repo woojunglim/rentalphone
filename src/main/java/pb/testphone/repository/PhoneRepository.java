@@ -1,5 +1,6 @@
 package pb.testphone.repository;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pb.testphone.domain.Phone;
 
@@ -8,13 +9,18 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class PhoneRepository {
 
     @PersistenceContext
     private EntityManager em;
 
     public void save(Phone phone) {
-        // ??
+        if (phone.getId() == null) {
+            em.persist(phone);
+        } else {
+            em.merge(phone);
+        }
     }
 
     public Phone findOne(Long id) {

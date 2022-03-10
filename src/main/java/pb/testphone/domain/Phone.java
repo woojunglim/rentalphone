@@ -12,7 +12,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
 @Getter @Setter
-public abstract class Phone {
+public class Phone {
 
     @Id @GeneratedValue
     @Column(name = "phone_id")
@@ -24,10 +24,20 @@ public abstract class Phone {
     @ManyToMany(mappedBy = "phones")
     private List<Category> cateories = new ArrayList<Category>();
 
+    // 도메인 주도 설계 : 엔티티 자체가 해결할 수 있으면 도메인 내에서 비즈니스 로직을 해결하는 것이 더 객체지향적
+
+    /**
+     * stock 증가
+     * @param quantity
+     */
     public void addStock(int quantity) {
         this.stockQuantity += quantity;
     }
 
+    /**
+     * stock 감소
+     * @param quantity
+     */
     public void removeStock(int quantity) {
         int restStock = stockQuantity - quantity;
         if(restStock < 0 ){
