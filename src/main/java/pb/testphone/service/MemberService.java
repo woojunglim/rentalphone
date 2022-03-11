@@ -49,6 +49,15 @@ public class MemberService {
     }
 
     /**
+     * 회원 다건 조회(부서명)
+     * @param department
+     * @return
+     */
+    public List<Member> findMembers(String department) {
+        return memberRepository.findByDept(department);
+    }
+
+    /**
      * 회원 단건 조회
      * @param memberId
      * @return Member
@@ -56,5 +65,4 @@ public class MemberService {
     public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
     }
-
 }

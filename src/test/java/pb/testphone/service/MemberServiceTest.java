@@ -72,4 +72,44 @@ public class MemberServiceTest {
         //then
         assertEquals(2, memberList.size());
     }
+
+    @Test
+    public void 회원_부서명_조회1() throws Exception {
+        //given
+        Member member = new Member();
+        member.setId(20214100L);
+        member.setDepartment("페이북개발팀");
+
+        //when
+        memberService.join(member);
+        List<Member> memberList = memberService.findMembers(member.getDepartment());
+
+        //then
+        assertEquals(1, memberList.size());
+    }
+
+    @Test
+    public void 회원_부서명_조회2() throws Exception {
+        //given
+        Member member1 = new Member();
+        member1.setId(20214100L);
+        member1.setDepartment("페이북개발팀");
+
+        Member member2 = new Member();
+        member2.setId(20214101L);
+        member2.setDepartment("페이북개발팀");
+
+        Member member3 = new Member();
+        member3.setId(20214102L);
+        member3.setDepartment("CB사업팀");
+
+        //when
+        memberService.join(member1);
+        memberService.join(member2);
+        memberService.join(member3);
+        List<Member> memberList = memberService.findMembers(member1.getDepartment());
+
+        //then
+        assertEquals(2, memberList.size());
+    }
 }

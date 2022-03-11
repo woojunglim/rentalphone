@@ -16,6 +16,7 @@ public class Member {
     private Long id;
 
     private String name;
+    private String department;
 
     @OneToMany(mappedBy = "member")
     private List<Rental> rentals = new ArrayList<>();
