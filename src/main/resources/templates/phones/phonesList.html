@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>기기명</th>
+                <th>OS명</th>
+                <th>재고</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="phone : ${phones}">
+                <td th:text="${phone.id}"></td>
+                <td th:text="${phone.name}"></td>
+                <td th:text="${phone.osName}"></td>
+                <td th:text=1></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>

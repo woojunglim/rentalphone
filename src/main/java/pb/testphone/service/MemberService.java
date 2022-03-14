@@ -58,7 +58,7 @@ public class MemberService {
     }
 
     /**
-     * 회원 단건 조회
+     * 회원 단건 조회(사번)
      * @param memberId
      * @return Member
      */

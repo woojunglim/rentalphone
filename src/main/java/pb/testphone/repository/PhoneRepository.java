@@ -27,6 +27,18 @@ public class PhoneRepository {
         return em.find(Phone.class, id);
     }
 
+    public List<Phone> findByName(String name) {
+        return em.createQuery("select p from Phone p where p.name =: name", Phone.class)
+                .setParameter("name", name)
+                .getResultList();
+    }
+
+    public List<Phone> findByOS(String osName) {
+        return em.createQuery("select p from Phone p where p.osName =: osName", Phone.class)
+                .setParameter("osName", osName)
+                .getResultList();
+    }
+
     public List<Phone> findAll() {
         return em.createQuery("select p from Phone p", Phone.class).getResultList();
     }

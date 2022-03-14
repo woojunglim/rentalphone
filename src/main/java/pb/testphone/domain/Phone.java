@@ -14,11 +14,12 @@ import java.util.List;
 @Getter @Setter
 public class Phone {
 
-    @Id @GeneratedValue
+    @Id
     @Column(name = "phone_id")
     private Long id;
 
     private String name;
+    private String osName;
     private int stockQuantity;
 
     @ManyToMany(mappedBy = "phones")
@@ -28,10 +29,9 @@ public class Phone {
 
     /**
      * stock 증가
-     * @param quantity
      */
-    public void addStock(int quantity) {
-        this.stockQuantity += quantity;
+    public void addStock() {
+        this.stockQuantity += 1;
     }
 
     /**
