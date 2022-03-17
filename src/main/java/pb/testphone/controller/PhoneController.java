@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pb.testphone.domain.Phone;
 import pb.testphone.service.PhoneService;
@@ -47,4 +49,37 @@ public class PhoneController {
         model.addAttribute("phones", phoneList);
         return "/phones/phonesList";
     }
+
+    /**
+     * 폰 정보 수정
+     * @param phoneId
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "/phones/{phoneId}/edit")
+    public String updatePhoneForm(@PathVariable("phoneId") Long phoneId, Model
+            model) {
+        Phone phone = phoneService.findOne(phoneId);
+        PhoneForm form = new PhoneForm();
+        form.setId(phone.getId());
+        form.setName(phone.getName());
+        form.setOsName(phone.getOsName());
+
+        model.addAttribute("phoneForm", form);
+        return "phones/updatePhoneForm";
+    }
+
+
+    @PostMapping(value = "/phones/{phoneId}/edit")
+    public String updateItem(@ModelAttribute("phoneForm") PhoneForm form) {
+        Phone phone = new Phone();
+
+        phone.setId(form.getId());
+        phone.setName(form.getName());
+        phone.setOsName(form.getOsName());
+
+        phoneService.registerPhone(phone);
+        return "redirect:/phones";
+    }
+
 }

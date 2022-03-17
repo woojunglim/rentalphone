@@ -18,6 +18,10 @@
                 <td th:text="${phone.name}"></td>
                 <td th:text="${phone.osName}"></td>
                 <td th:text=1></td>
+                <td>
+                    <a href="#" th:href="@{/phones/{id}/edit (id=${phone.id})}"
+                       class="btn btn-primary" role="button">수정</a>
+                </td>
             </tr>
             </tbody>
         </table>
